@@ -6,9 +6,10 @@ if ( (Get-PSSnapin -Name veeampssnapin -ErrorAction SilentlyContinue) -eq $null 
 
 $job_name = Read-Host -Prompt 'Backup Job Name'
 $days = Read-Host -Prompt 'Number of days to fetch'
+$folder = Read-Host -Prompt 'Enter the full path where you would like to save the output. FOLDER ONLY. I will create the file. dont forget the trailing "\"'
 
 $Date = Get-Date 
-$Filename = "C:\Users\administrator.BECHT\Desktop\VeeamReports\" + "_" + "$env:computername" + "_" + $Date.Month + "-" + $Date.Day + "-" + $Date.Year + "-" + $Date.Hour + "-" + $Date.Minute + "-" + $Date.Second + ".csv"
+$Filename = $folder + "_" + "$env:computername" + "_" + $Date.Month + "-" + $Date.Day + "-" + $Date.Year + "-" + $Date.Hour + "-" + $Date.Minute + "-" + $Date.Second + ".csv"
 
 $Jobs = Get-VBRJob | ?{$_.Name -match $job_name}
 $sessionstofetch = $days
